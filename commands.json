@@ -1,0 +1,177 @@
+{
+    "ls": {
+        "description": "Lists files and directories.",
+        "usage": "ls [OPTIONS] [DIRECTORY]",
+        "example": "ls -l /home/user"
+    },
+    "pwd": {
+        "description": "Prints the current working directory.",
+        "usage": "pwd",
+        "example": "pwd"
+    },
+    "cd": {
+        "description": "Changes the current directory.",
+        "usage": "cd [DIRECTORY]",
+        "example": "cd /home/user/Documents"
+    },
+    "mkdir": {
+        "description": "Creates a new directory.",
+        "usage": "mkdir [DIRECTORY_NAME]",
+        "example": "mkdir myfolder"
+    },
+    "rm": {
+        "description": "Removes files or directories.",
+        "usage": "rm [OPTIONS] [FILE/DIRECTORY]",
+        "example": "rm -rf myfolder"
+    },
+    "rmdir": {
+        "description": "Removes empty directories.",
+        "usage": "rmdir [DIRECTORY]",
+        "example": "rmdir empty_folder"
+    },
+    "touch": {
+        "description": "Creates a new empty file.",
+        "usage": "touch [FILE_NAME]",
+        "example": "touch newfile.txt"
+    },
+    "cp": {
+        "description": "Copies files or directories.",
+        "usage": "cp [OPTIONS] SOURCE DESTINATION",
+        "example": "cp file.txt /home/user/Documents"
+    },
+    "mv": {
+        "description": "Moves or renames a file or directory.",
+        "usage": "mv [SOURCE] [DESTINATION]",
+        "example": "mv oldname.txt newname.txt"
+    },
+    "cat": {
+        "description": "Displays the contents of a file.",
+        "usage": "cat [FILE]",
+        "example": "cat file.txt"
+    },
+    "echo": {
+        "description": "Prints text to the terminal.",
+        "usage": "echo [TEXT]",
+        "example": "echo 'Hello, World!'"
+    },
+    "man": {
+        "description": "Displays the manual page of a command.",
+        "usage": "man [COMMAND]",
+        "example": "man ls"
+    },
+    "chmod": {
+        "description": "Changes file permissions.",
+        "usage": "chmod [PERMISSIONS] [FILE]",
+        "example": "chmod 755 script.sh"
+    },
+    "chown": {
+        "description": "Changes the owner of a file or directory.",
+        "usage": "chown [USER] [FILE]",
+        "example": "chown user:group file.txt"
+    },
+    "df": {
+        "description": "Shows disk space usage.",
+        "usage": "df [OPTIONS]",
+        "example": "df -h"
+    },
+    "du": {
+        "description": "Estimates file space usage.",
+        "usage": "du [OPTIONS] [FILE/DIRECTORY]",
+        "example": "du -sh /home/user"
+    },
+    "top": {
+        "description": "Displays system processes and resource usage.",
+        "usage": "top",
+        "example": "top"
+    },
+    "ps": {
+        "description": "Shows information about active processes.",
+        "usage": "ps [OPTIONS]",
+        "example": "ps aux"
+    },
+    "kill": {
+        "description": "Terminates a process by ID.",
+        "usage": "kill [PROCESS_ID]",
+        "example": "kill 1234"
+    },
+    "grep": {
+        "description": "Searches for patterns in text files.",
+        "usage": "grep [PATTERN] [FILE]",
+        "example": "grep 'error' log.txt"
+    },
+    "find": {
+        "description": "Searches for files in a directory hierarchy.",
+        "usage": "find [DIRECTORY] [OPTIONS] [EXPRESSION]",
+        "example": "find /home -name '*.txt'"
+    },
+    "tar": {
+        "description": "Compresses or extracts archive files.",
+        "usage": "tar [OPTIONS] [ARCHIVE_NAME] [FILES]",
+        "example": "tar -cvf archive.tar file.txt"
+    },
+    "zip": {
+        "description": "Creates compressed .zip files.",
+        "usage": "zip [ARCHIVE_NAME.zip] [FILES]",
+        "example": "zip archive.zip file.txt"
+    },
+    "unzip": {
+        "description": "Extracts files from a .zip archive.",
+        "usage": "unzip [ARCHIVE.zip]",
+        "example": "unzip archive.zip"
+    },
+    "wget": {
+        "description": "Downloads files from the web.",
+        "usage": "wget [URL]",
+        "example": "wget https://example.com/file.txt"
+    },
+    "curl": {
+        "description": "Transfers data from a URL.",
+        "usage": "curl [OPTIONS] [URL]",
+        "example": "curl -O https://example.com/file.txt"
+    },
+    "ping": {
+        "description": "Tests network connectivity.",
+        "usage": "ping [IP/DOMAIN]",
+        "example": "ping google.com"
+    },
+    "traceroute": {
+        "description": "Displays the path packets take to a network host.",
+        "usage": "traceroute [HOST]",
+        "example": "traceroute google.com"
+    },
+    "ip": {
+        "description": "Shows/manages network interfaces and routing.",
+        "usage": "ip [OPTIONS] [COMMAND]",
+        "example": "ip addr show"
+    },
+    "systemctl": {
+        "description": "Manages systemd services.",
+        "usage": "systemctl [COMMAND] [SERVICE]",
+        "example": "systemctl restart apache2"
+    },
+    "journalctl": {
+        "description": "Views system logs.",
+        "usage": "journalctl [OPTIONS]",
+        "example": "journalctl -xe"
+    },
+    "uname": {
+        "description": "Displays system information.",
+        "usage": "uname -a",
+        "example": "uname -a"
+    },
+    "uptime": {
+        "description": "Shows how long the system has been running.",
+        "usage": "uptime",
+        "example": "uptime"
+    },
+    "whoami": {
+        "description": "Prints the current user name.",
+        "usage": "whoami",
+        "example": "whoami"
+    },
+    "passwd": {
+        "description": "Changes the user password.",
+        "usage": "passwd [USER]",
+        "example": "passwd"
+    }
+}

@@ -603,7 +603,7 @@
     "name": "tc filter change",
     "category": "Networking",
     "description": "Changes a network filter"
-  }
+  },
   {
     "name": "diff",
     "category": "Text Processing",

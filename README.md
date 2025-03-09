@@ -3,7 +3,7 @@
 A powerful **CLI-based tutor** for learning **Linux commands** with explanations, examples, quizzes, and practice mode!  
 
 ## 📌 Features
-✅ **100+ Linux Commands Explained**  
+✅ **1000+ Linux Commands Explained**  
 ✅ **Search & Autocomplete**  
 ✅ **Quizzes to Test Your Knowledge**  
 ✅ **Practice Mode to Type Commands**  

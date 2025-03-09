@@ -4,93 +4,76 @@ import os
 import sys
 from termcolor import colored
 
-# Load Linux commands from JSON
+# Load Linux commands from JSON (New Format: List of Dictionaries)
 def load_commands():
-    try:
-        with open("commands.json", "r") as file:
-            data = json.load(file)
-            return data
-    except FileNotFoundError:
-        print(colored("Error: commands.json not found.  Make sure it's in the same directory.", "red"))
-        sys.exit(1)  # Exit the program if the file isn't found
-    except json.JSONDecodeError:
-        print(colored("Error: commands.json is not a valid JSON file.", "red"))
-        sys.exit(1) # Exit if the JSON is invalid
-    except Exception as e:
-        print(colored(f"An unexpected error occurred: {e}", "red")) # Generic error
-        sys.exit(1)
+    with open("commands.json", "r") as file:
+        return json.load(file)  
 
 COMMANDS = load_commands()
 
-# Display command details
-def show_command_info(command):
-    if command in COMMANDS:
-        info = COMMANDS[command]
-        print(colored(f"\n🔹 Command: {command}", "green", attrs=["bold"]))
-        print(colored(f"📌 Description: {info.get('description', 'No description available')}", "cyan"))
-        print(colored(f"📜 Usage: {info.get('usage', 'No usage information available')}", "yellow"))
-        print(colored(f"💡 Example: {info.get('example', 'No example available')}", "magenta"))
-    else:
-        print(colored(f"❌ Command '{command}' not found!", "red"))
+# Show command details
+def show_command_info(command_name):
+    found = False
+    for cmd in COMMANDS:
+        if cmd["name"] == command_name:
+            print(colored(f"\n🔹 Command: {cmd['name']}", "green", attrs=["bold"]))
+            print(colored(f"📌 Category: {cmd['category']}", "blue"))
+            print(colored(f"📜 Description: {cmd['description']}", "cyan"))
+            found = True
+            break
+
+    if not found:
+        print(colored(f"❌ Command '{command_name}' not found!", "red"))
 
 # Search for commands
 def search_commands(keyword):
     print(colored(f"\n🔎 Searching for '{keyword}'...\n", "blue"))
-    results = [cmd for cmd in COMMANDS if keyword in cmd.lower()]  # Lowercase for case-insensitive search
+    results = [cmd for cmd in COMMANDS if keyword.lower() in cmd["name"]]
+
     if results:
         for cmd in results:
-            info = COMMANDS[cmd]  # Access the dictionary using the command name
-            print(colored(f"👉 {cmd}: {info.get('description', 'No description available')}", "green"))  # Use .get() for safety
+            print(colored(f"👉 {cmd['name']}: {cmd['description']}", "green"))
     else:
         print(colored("❌ No matching commands found!", "red"))
 
 # Quiz mode
 def quiz_mode():
     print(colored("\n🧠 QUIZ MODE: Identify the Command!", "yellow", attrs=["bold"]))
-    if not COMMANDS:
-        print(colored("❌ No commands loaded. Please check commands.json.", "red"))
-        return
-
-    command = random.choice(list(COMMANDS.keys())) # Get a random *key* (command name)
-    details = COMMANDS[command] # Access the details using the command name
-
-    print(colored(f"📌 Description: {details.get('description', 'No description available')}", "cyan")) # Safely access 'description'
+    
+    command_info = random.choice(COMMANDS)  # Pick a random command
+    command_name = command_info["name"]
+    
+    print(colored(f"📌 Description: {command_info['description']}", "cyan"))
     answer = input(colored("🔹 Your Answer: ", "yellow")).strip()
 
-    if answer.lower() == command.lower():  # Compare in lowercase
+    if answer.lower() == command_name:
         print(colored("✅ Correct!", "green"))
     else:
-        print(colored(f"❌ Incorrect! The correct command is: {command}", "red"))
-
+        print(colored(f"❌ Incorrect! The correct command is: {command_name}", "red"))
 
 # Practice mode
 def practice_mode():
     print(colored("\n🎯 PRACTICE MODE: Try the Command!", "yellow", attrs=["bold"]))
-    if not COMMANDS:
-        print(colored("❌ No commands loaded. Please check commands.json.", "red"))
-        return
+    
+    command_info = random.choice(COMMANDS)
+    
+    print(colored(f"📌 Description: {command_info['description']}", "cyan"))
+    print(colored(f"💡 Example: {command_info['name']}", "magenta"))
+    
+    user_input = input(colored("\n🔹 Type the command: ", "yellow")).strip()
 
-    command = random.choice(list(COMMANDS.keys()))  # Get a random command name
-    details = COMMANDS[command]
-
-    print(colored(f"📌 Description: {details.get('description', 'No description available')}", "cyan"))  # Safe access
-    print(colored(f"💡 Example: {details.get('example', 'No example available')}", "magenta"))  # Safe access
-
-    user_input = input(colored("\n🔹 Type the command as shown: ", "yellow")).strip()
-
-    if user_input == details.get('example', ''): # Compare with example, or empty string if no example
+    if user_input == command_info["name"]:
         print(colored("✅ Correct!", "green"))
     else:
         print(colored("❌ Incorrect! Try again.", "red"))
-
-
 
 # Interactive CLI
 def main():
     os.system("clear")
     print(colored("🚀 Linux Command Tutor CLI", "green", attrs=["bold", "underline"]))
+
     while True:
-        user_input = input(colored("\n🔹 Enter a Linux command (or type 'exit'/'search [keyword]'/'quiz'/'practice'): ", "yellow")).strip()
+        user_input = input(colored("\n🔹 Enter a Linux command (or 'exit'/'search [keyword]'/'quiz'/'practice'): ", "yellow")).strip()
 
         if user_input.lower() == "exit":
             print(colored("👋 Exiting... Happy Learning!", "cyan"))

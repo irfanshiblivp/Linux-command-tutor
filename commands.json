@@ -1885,7 +1885,6 @@
     "description": "Netcat for network exploration"
   },
   {
-    "name  {
     "name": "nano",
     "category": "Text Processing",
     "description": "Simple text editor"

@@ -12,7 +12,7 @@ A powerful **CLI-based tutor** for learning **Linux commands** with explanations
 ## 🖥️ Installation
 Clone this repository:
 ```bash
-pip install termcolor
+pip install termcolor rich
 git clone https://github.com/irfanshiblivp/linux-command-tutor.git
 cd linux-command-tutor
 python linux_tutor.py

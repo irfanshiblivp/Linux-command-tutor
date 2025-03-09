@@ -4,12 +4,18 @@ import os
 import sys
 from termcolor import colored
 
-# Load Linux commands from JSON (New Format: List of Dictionaries)
+# Load Linux commands from JSON
 def load_commands():
     with open("commands.json", "r") as file:
-        return json.load(file)  
+        return json.load(file)
 
 COMMANDS = load_commands()
+
+# List all commands with numbering
+def list_all_commands():
+    print(colored("\n📜 Available Linux Commands:", "blue", attrs=["bold"]))
+    for index, cmd in enumerate(COMMANDS, start=1):
+        print(colored(f"{index}. {cmd['name']} - {cmd['description']}", "green"))
 
 # Show command details
 def show_command_info(command_name):
@@ -31,8 +37,8 @@ def search_commands(keyword):
     results = [cmd for cmd in COMMANDS if keyword.lower() in cmd["name"]]
 
     if results:
-        for cmd in results:
-            print(colored(f"👉 {cmd['name']}: {cmd['description']}", "green"))
+        for index, cmd in enumerate(results, start=1):
+            print(colored(f"{index}. {cmd['name']} - {cmd['description']}", "green"))
     else:
         print(colored("❌ No matching commands found!", "red"))
 
@@ -73,11 +79,13 @@ def main():
     print(colored("🚀 Linux Command Tutor CLI", "green", attrs=["bold", "underline"]))
 
     while True:
-        user_input = input(colored("\n🔹 Enter a Linux command (or 'exit'/'search [keyword]'/'quiz'/'practice'): ", "yellow")).strip()
+        user_input = input(colored("\n🔹 Enter a Linux command (or 'exit'/'list'/'search [keyword]'/'quiz'/'practice'): ", "yellow")).strip()
 
         if user_input.lower() == "exit":
             print(colored("👋 Exiting... Happy Learning!", "cyan"))
             sys.exit()
+        elif user_input.lower() == "list":
+            list_all_commands()
         elif user_input.startswith("search "):
             keyword = user_input.split(" ", 1)[1]
             search_commands(keyword)

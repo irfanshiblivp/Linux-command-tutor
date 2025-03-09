@@ -2,6 +2,7 @@ import json
 import random
 import os
 import sys
+import time
 from termcolor import colored
 
 # Load Linux commands from JSON
@@ -11,9 +12,29 @@ def load_commands():
 
 COMMANDS = load_commands()
 
+# Fancy loading effect
+def loading_animation(text="Loading", dots=3, duration=0.5):
+    for _ in range(dots):
+        print(colored(f"\r{text}{'.' * (_+1)}", "cyan"), end="")
+        time.sleep(duration)
+    print("\n")
+
+# Beautified title
+def print_title():
+    os.system("clear")
+    print(colored("════════════════════════════════════════", "green"))
+    print(colored("🚀 WELCOME TO LINUX COMMAND TUTOR CLI 🚀", "yellow", attrs=["bold"]))
+    print(colored("════════════════════════════════════════", "green"))
+
+# Beautified footer (Watermark)
+def print_footer():
+    print(colored("\n════════════════════════════════════════", "green"))
+    print(colored("🔥 Made with ❤️ by @irfanshiblivp 🔥", "blue", attrs=["bold"]))
+    print(colored("════════════════════════════════════════", "green"))
+
 # List all commands with numbering
 def list_all_commands():
-    print(colored("\n📜 Available Linux Commands:", "blue", attrs=["bold"]))
+    print(colored("\n📜 AVAILABLE LINUX COMMANDS:", "blue", attrs=["bold"]))
     for index, cmd in enumerate(COMMANDS, start=1):
         print(colored(f"{index}. {cmd['name']} - {cmd['description']}", "green"))
 
@@ -22,9 +43,11 @@ def show_command_info(command_name):
     found = False
     for cmd in COMMANDS:
         if cmd["name"] == command_name:
-            print(colored(f"\n🔹 Command: {cmd['name']}", "green", attrs=["bold"]))
-            print(colored(f"📌 Category: {cmd['category']}", "blue"))
-            print(colored(f"📜 Description: {cmd['description']}", "cyan"))
+            print(colored("\n════════════════════════════", "yellow"))
+            print(colored(f"🔹 COMMAND: {cmd['name']}", "green", attrs=["bold"]))
+            print(colored(f"📌 CATEGORY: {cmd['category']}", "blue"))
+            print(colored(f"📜 DESCRIPTION: {cmd['description']}", "cyan"))
+            print(colored("════════════════════════════", "yellow"))
             found = True
             break
 
@@ -33,7 +56,7 @@ def show_command_info(command_name):
 
 # Search for commands
 def search_commands(keyword):
-    print(colored(f"\n🔎 Searching for '{keyword}'...\n", "blue"))
+    print(colored(f"\n🔎 SEARCHING FOR '{keyword}'...\n", "blue"))
     results = [cmd for cmd in COMMANDS if keyword.lower() in cmd["name"]]
 
     if results:
@@ -49,7 +72,7 @@ def quiz_mode():
     command_info = random.choice(COMMANDS)  # Pick a random command
     command_name = command_info["name"]
     
-    print(colored(f"📌 Description: {command_info['description']}", "cyan"))
+    print(colored(f"📌 DESCRIPTION: {command_info['description']}", "cyan"))
     answer = input(colored("🔹 Your Answer: ", "yellow")).strip()
 
     if answer.lower() == command_name:
@@ -63,8 +86,8 @@ def practice_mode():
     
     command_info = random.choice(COMMANDS)
     
-    print(colored(f"📌 Description: {command_info['description']}", "cyan"))
-    print(colored(f"💡 Example: {command_info['name']}", "magenta"))
+    print(colored(f"📌 DESCRIPTION: {command_info['description']}", "cyan"))
+    print(colored(f"💡 EXAMPLE: {command_info['name']}", "magenta"))
     
     user_input = input(colored("\n🔹 Type the command: ", "yellow")).strip()
 
@@ -75,14 +98,15 @@ def practice_mode():
 
 # Interactive CLI
 def main():
-    os.system("clear")
-    print(colored("🚀 Linux Command Tutor CLI", "green", attrs=["bold", "underline"]))
+    print_title()
+    loading_animation("Starting up")
 
     while True:
         user_input = input(colored("\n🔹 Enter a Linux command (or 'exit'/'list'/'search [keyword]'/'quiz'/'practice'): ", "yellow")).strip()
 
         if user_input.lower() == "exit":
             print(colored("👋 Exiting... Happy Learning!", "cyan"))
+            print_footer()
             sys.exit()
         elif user_input.lower() == "list":
             list_all_commands()

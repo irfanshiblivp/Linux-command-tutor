@@ -41,7 +41,7 @@ def loading_animation(text="Loading"):
 # Floating watermark
 def show_watermark():
     width = get_terminal_width()
-    watermark = colored("🔥 Created by @irfanshiblivp 🔥", "blue", attrs=["bold"])
+    watermark = colored("🔥 github @irfanshiblivp 🔥", "blue", attrs=["bold"])
     print("\n" + watermark.center(width) + "\n")
 
 # Beautiful title screen
